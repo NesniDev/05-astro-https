@@ -9,7 +9,7 @@ export const GET: APIRoute = async ({params, request}) =>{
     
     const {slug} = params
 
-    const post = await getEntry("blog", slug)
+    const post = await getEntry("blog", slug as any)
 
     if(!post){
         return new Response(JSON.stringify({msg: `No se encontro el post con el path ${slug}`}), {
