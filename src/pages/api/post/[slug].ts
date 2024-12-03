@@ -75,11 +75,12 @@ export const PATCH: APIRoute = async ({params, request}) => {
 
 export const DELETE: APIRoute = async ({params, request}) => {
 
-    const body = await request.json()
+    const {slug} = await request.json()
 
     return new Response(JSON.stringify({
         method: "DELETE",
-        slug: params.slug,
+        slug: slug,
+        msg: "Se ha eliminado el post con el slug " + slug
     }), {
         status: 200,
         headers: {
