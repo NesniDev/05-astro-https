@@ -1,18 +1,18 @@
 import type { APIRoute } from "astro";
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 
 export const prerender = false; 
 
 export const GET: APIRoute = async ({ params, request}) => {
 
-    const blogPost = await getCollection("blog")
+    const blogPost: CollectionEntry<"blog">[] = await getCollection("blog");
 
     const url = new URL(request.url)
 
-    const slug = url.searchParams.get("slug")
+    const slug = url.searchParams.get("slug") 
  
     if(slug) {
-        const posts = blogPost.filter(p => p.slug === slug)
+        const posts = blogPost.filter(p  => p.slug === slug)
         if(posts.length > 0){
             return new Response(JSON.stringify(posts), {
                 status: 200,
